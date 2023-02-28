@@ -24,6 +24,12 @@ cd sw_planets_api/db
 docker build -t sw_planets_api_db ./
 ```
 
+Test
+```
+cd sw_planets_api/db
+docker build -t sw_planets_api_db_test ./
+```
+
 ## Usage
 ??? Documentation ??? 
 
@@ -33,17 +39,16 @@ docker-compose up
 ```
 
 Local
-Run db on a separated terminal
 ```
-docker run --env MYSQL_DATABASE=db --env MYSQL_ROOT_PASSWORD=root -p 3308:3306 -t sw_planets_api_db
-```
+docker run --env MYSQL_DATABASE=db --env MYSQL_ROOT_PASSWORD=root -p 3308:3306 -d -t sw_planets_api_db
 
-```
 python3 sw_planets_api/main.py
 ```
 
 ## Tests
 ```
+docker run --env MYSQL_DATABASE=db --env MYSQL_ROOT_PASSWORD=root -p 3309:3306 -d -t sw_planets_api_db_test
+
 pytest -v
 ```
 
