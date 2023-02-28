@@ -45,3 +45,20 @@ Log information is written, by default, into the file '???.log'
 - [x] Logging
 - [ ] Setup Docker
 - [ ] Setup DB
+
+
+
+https://swapi.dev/about
+
+https://swapi.dev/documentation
+
+https://swapi.dev/
+
+Planets (https://swapi.dev/api/planets)
+    name
+    climate
+    terrain
+    films (https://swapi.dev/api/films/1/)
+        title
+        director
+        release_date

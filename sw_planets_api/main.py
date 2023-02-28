@@ -1,6 +1,7 @@
 import sys
 import logging
-from sw_planets_api.Planet import Planet
+import mysql.connector
+# from sw_planets_api.Planet import Planet
 
 
 logging.basicConfig(filename="sw_planets_api.log",
@@ -10,9 +11,21 @@ logging.basicConfig(filename="sw_planets_api.log",
 
 
 def main() -> None:
-    p = Planet()
-    logging.info("Printing Planet.test()")
-    print(p.test())
+    connection = mysql.connector.connect(
+        user="root",
+        password="root",
+        host="sw_planets_db",
+        port="3306",
+        database="db"
+    )
+    print("DBN connected")
+
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM planets")
+    planets = cursor.fetchall()
+    connection.close()
+
+    print(planets)
 
 
 if __name__ == "__main__":
