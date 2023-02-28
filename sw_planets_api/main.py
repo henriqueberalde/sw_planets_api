@@ -1,7 +1,7 @@
 import sys
 import logging
 import mysql.connector
-# from sw_planets_api.Planet import Planet
+from sw_planets_api.planet import Planet
 
 
 logging.basicConfig(filename="sw_planets_api.log",
@@ -10,7 +10,7 @@ logging.basicConfig(filename="sw_planets_api.log",
                     level=logging.DEBUG)
 
 
-def main() -> None:
+def print_all_planets():
     connection = mysql.connector.connect(
         user="root",
         password="root",
@@ -26,6 +26,17 @@ def main() -> None:
     connection.close()
 
     print(planets)
+
+
+def planet_test():
+    p = Planet()
+    p.test
+
+
+def main() -> None:
+    print_all_planets()
+
+    planet_test()
 
 
 if __name__ == "__main__":

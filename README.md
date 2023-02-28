@@ -43,8 +43,8 @@ Log information is written, by default, into the file '???.log'
 - [x] Setup Linter
 - [x] Setup pytest
 - [x] Logging
-- [ ] Setup Docker
-- [ ] Setup DB
+- [x] Setup Docker
+- [x] Setup DB
 
 
 
