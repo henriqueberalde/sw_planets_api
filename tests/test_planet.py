@@ -1,4 +1,4 @@
-from sw_planets_api.Planet import Planet
+from sw_planets_api.models.planet import Planet
 
 
 def test_main():

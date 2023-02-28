@@ -8,7 +8,9 @@ packages = [{include = "sw_planets_api"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-mysql-connector-python = "^8.0.32"
+pymysql = "^1.0.2"
+sqlalchemy = "1.4.42"
+cryptography = "^39.0.1"
 
 
 [tool.poetry.group.dev.dependencies]

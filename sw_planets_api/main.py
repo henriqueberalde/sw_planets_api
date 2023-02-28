@@ -1,31 +1,24 @@
 import sys
 import logging
-import mysql.connector
-from sw_planets_api.planet import Planet
+
+import sw_planets_api.models.db as db
+from sw_planets_api.models.planet import Planet
 
 
-logging.basicConfig(filename="sw_planets_api.log",
-                    format="%(asctime)s:%(levelname)s:%(message)s",
-                    encoding="utf-8",
-                    level=logging.DEBUG)
+logging.basicConfig(
+        filename="sw_planets_api.log",
+        format="%(asctime)s:%(levelname)s:%(message)s",
+        encoding="utf-8",
+        level=logging.DEBUG
+    )
 
 
 def print_all_planets():
-    connection = mysql.connector.connect(
-        user="root",
-        password="root",
-        host="sw_planets_db",
-        port="3306",
-        database="db"
-    )
-    print("DBN connected")
+    session = db.get_session()
+    planets = session.query(Planet).all()
 
-    cursor = connection.cursor()
-    cursor.execute("SELECT * FROM planets")
-    planets = cursor.fetchall()
-    connection.close()
-
-    print(planets)
+    for planet in planets:
+        print(planet.name)
 
 
 def planet_test():
