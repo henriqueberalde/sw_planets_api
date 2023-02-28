@@ -1,0 +1,11 @@
+{
+    "python.analysis.typeCheckingMode": "basic",
+    "python.defaultInterpreterPath": "~/.cache/pypoetry/virtualenvs/sw-planets-api-bFuQKPsV-py3.10/bin/python",
+    "python.analysis.extraPaths": ["${workspaceFolder}/sw_planets_api"],
+    "python.linting.pycodestyleEnabled": true,
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+}

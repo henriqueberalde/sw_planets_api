@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "sw-planets-api"
+version = "0.1.0"
+description = ""
+authors = ["Carlos Henrique Beralde (Caique) <henrique.beralde@gmail.com>"]
+readme = "README.md"
+packages = [{include = "sw_planets_api"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[tool.poetry.group.dev.dependencies]
+pycodestyle = "^2.10.0"
+pytest = "^7.2.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
