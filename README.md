@@ -45,6 +45,11 @@ docker run --env MYSQL_DATABASE=db --env MYSQL_ROOT_PASSWORD=root -p 3308:3306 -
 python3 sw_planets_api/main.py
 ```
 
+#### API Documentation
+Endpoints
+
+
+
 ## Tests
 ```
 docker run --env MYSQL_DATABASE=db --env MYSQL_ROOT_PASSWORD=root -p 3309:3306 -d -t sw_planets_api_db_test
@@ -97,7 +102,7 @@ Possible improvements:
 - [x] Global response pattern for all requests
 - [x] Test Coverage
 - [x] Log
-- [ ] Api Documentation (with examples)
+- [x] Api Documentation (with examples)
 
 - [ ] Test conteinerized env
 - [x] Remove print

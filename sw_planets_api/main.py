@@ -1,7 +1,7 @@
 import sys
 import logging
-
 from app import create_app
+from flasgger import Flasgger, Swagger
 
 logging.basicConfig(
         filename="sw_planets_api.log",
@@ -13,6 +13,8 @@ logging.basicConfig(
 
 def main() -> None:
     app = create_app()
+
+    s = Swagger(app)
     app.run(port=5000, host="localhost", debug=True)
 
 

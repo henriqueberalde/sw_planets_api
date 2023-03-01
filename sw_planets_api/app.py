@@ -26,6 +26,8 @@ def create_app(session=None):
     if session is None:
         session = db.get_session()
 
+    app = Flask(__name__)
+
     dictConfig({
         "version": 1,
         "formatters": {"default": {
@@ -49,10 +51,60 @@ def create_app(session=None):
         }
     })
 
-    app = Flask(__name__)
-
     @app.route("/planets/load/<int:id>", methods=["POST"])
     def insert_planet_from_api(id):
+        """Loads a planet from SWAPI into local database
+        This is using docstrings for specifications.
+        ---
+        tags:
+          - Load Planet
+        parameters:
+          - name: id
+            in: path
+            type: number
+            required: true
+        definitions:
+          PlanetResponse:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/Planet'
+              error:
+                type: string
+              success:
+                type: boolean
+          Planet:
+            type: object
+            properties:
+              id:
+                type: number
+              name:
+                type: string
+              climate:
+                type: string
+              terrain:
+                type: string
+              films:
+                type: array
+                items:
+                  $ref: '#/definitions/Film'
+          Film:
+            type: object
+            properties:
+              id:
+                type: number
+              title:
+                type: string
+              director:
+                type: string
+              release_date:
+                type: string
+        responses:
+          200:
+            description: The corresponding planet loaded
+            schema:
+              $ref: '#/definitions/PlanetResponse'
+        """
         planet = StarWarsApiService.load_planet(session, id)
 
         app.logger.info(f"Planet {planet.name} loaded from SWAPI.")
@@ -68,6 +120,60 @@ def create_app(session=None):
 
     @app.route("/planets", methods=["GET"])
     def get_planets():
+        """List all planets corresponding to the passed parameters
+        This is using docstrings for specifications.
+        ---
+        tags:
+          - List Planets
+        parameters:
+          - name: name
+            in: query
+            type: string
+            required: false
+        definitions:
+          Planet:
+            type: object
+            properties:
+              id:
+                type: number
+              name:
+                type: string
+              climate:
+                type: string
+              terrain:
+                type: string
+              films:
+                type: array
+                items:
+                  $ref: '#/definitions/Film'
+          Film:
+            type: object
+            properties:
+              id:
+                type: number
+              title:
+                type: string
+              director:
+                type: string
+              release_date:
+                type: string
+          PlanetsResponse:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Planet'
+              error:
+                type: string
+              success:
+                type: boolean
+        responses:
+          200:
+            description: The list of all planets corresponding to the params
+            schema:
+              $ref: '#/definitions/PlanetsResponse'
+        """
         args = request.args
 
         if len(args) > 0:
@@ -81,6 +187,58 @@ def create_app(session=None):
 
     @app.route("/planets/<int:id>", methods=["GET"])
     def get_planet_by_id(id: int):
+        """Read a planet from local database
+        This is using docstrings for specifications.
+        ---
+        tags:
+          - Read Planet
+        parameters:
+          - name: id
+            in: path
+            type: number
+            required: true
+        definitions:
+          Planet:
+            type: object
+            properties:
+              id:
+                type: number
+              name:
+                type: string
+              climate:
+                type: string
+              terrain:
+                type: string
+              films:
+                type: array
+                items:
+                  $ref: '#/definitions/Film'
+          Film:
+            type: object
+            properties:
+              id:
+                type: number
+              title:
+                type: string
+              director:
+                type: string
+              release_date:
+                type: string
+          PlanetResponse:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/Planet'
+              error:
+                type: string
+              success:
+                type: boolean
+        responses:
+          200:
+            description: The planet corresponding to the provided `id`
+            schema:
+              $ref: '#/definitions/PlanetsResponse'
+        """
         app.logger.info(f"Getting planet {id}")
         planet = session.get(Planet, id)
 
@@ -88,6 +246,32 @@ def create_app(session=None):
 
     @app.route("/planets/<int:id>", methods=["DELETE"])
     def remove_planet(id: int):
+        """Remove a planet from local data_base
+        This is using docstrings for specifications.
+        ---
+        tags:
+          - Remove Planet
+        parameters:
+          - name: id
+            in: path
+            type: number
+            required: true
+        definitions:
+          DefaultResponse:
+            type: object
+            properties:
+              data:
+                type: object
+              error:
+                type: string
+              success:
+                type: boolean
+        responses:
+          200:
+            description: Removes a planet from local data_base
+            schema:
+              $ref: '#/definitions/DefaultResponse'
+        """
         app.logger.info(f"Removing planet {id}")
         planet = session.get(Planet, id)
 
