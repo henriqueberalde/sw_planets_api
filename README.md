@@ -83,13 +83,14 @@ Possible improvements:
 - [x] Setup ORM
 - [x] Setup DB and ORM for test
 - [x] Create Entities Planet and Film
-- [ ] Setup api lib
+- [x] Setup api lib (Flask)
 - [ ] Load planet from api by id
 - [ ] List all planets
 - [ ] Search planet by name
 - [ ] Search planet by id
 - [ ] Remove Planet
 - [ ] Documentation
+- [ ] Remove all single braquets
 
 
 

@@ -11,6 +11,7 @@ python = "^3.10"
 pymysql = "^1.0.2"
 sqlalchemy = "1.4.42"
 cryptography = "^39.0.1"
+flask = "^2.2.3"
 
 
 [tool.poetry.group.dev.dependencies]
