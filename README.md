@@ -63,7 +63,7 @@ Log information is written, by default, into the file '???.log'
 
 Possible improvements:
 
-- [ ] Add migration lib (ex alembic)
+- [ ] Add migration lib (ex: alembic)
 - [ ] 
 
 
@@ -85,12 +85,17 @@ Possible improvements:
 - [x] Create Entities Planet and Film
 - [x] Setup api lib (Flask)
 - [ ] Load planet from api by id
-- [ ] List all planets
-- [ ] Search planet by name
-- [ ] Search planet by id
-- [ ] Remove Planet
-- [ ] Documentation
+- [x] List all planets
+- [x] Search planet by name
+- [x] Search planet by id
+- [x] Remove Planet
+- [x] Global response pattern for all requests
+- [ ] Test Coverage
+- [ ] Log
+- [ ] Api Documentation (with examples)
+- [ ] Check Content-Type on header
 - [ ] Remove all single braquets
+- [ ] Test conteinerized env
 
 
 

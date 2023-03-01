@@ -1,65 +1,62 @@
-from flask import Flask, jsonify, request
+import sw_planets_api.models.db as db
+
+from flask import Flask, jsonify, request, make_response, Response
+from sw_planets_api.models.planet import Planet, PlanetsFilms
 
 
-app = Flask(__name__)
+def response_obj(data, error):
+    if error is None:
+        success = True
+    elif str(error) == "":
+        success = True
+    else:
+        success = False
 
-books = [
-    {
-        "id": 1,
-        "title": "Titanic",
-    },
-    {
-        "id": 2,
-        "title": "Troia",
-    },
-    {
-        "id": 3,
-        "title": "Eva",
-    },
-]
+    return jsonify({
+        "data": data,
+        "error": error,
+        "success": success
+    })
 
 
-@app.route("/books", methods=["GET"])
-def get_books():
-    return jsonify(books)
+def create_app(session=None):
+    if session is None:
+        session = db.get_session()
 
+    app = Flask(__name__)
 
-@app.route("/books/<int:id>", methods=["GET"])
-def get_book_by_id(id: int):
-    book = None
-    for b in books:
-        if b.get("id") == id:
-            book = b
+    @app.route("/planets/load/<int:id>", methods=["POST"])
+    def insert_planet_from_api():
+        return response_obj(None, None)
 
-    return jsonify(book)
+    @app.route("/planets", methods=["GET"])
+    def get_planets():
+        args = request.args
 
+        if len(args) > 0:
+            planets = session.query(Planet).filter_by(**args).all()
+        else:
+            planets = session.query(Planet).all()
 
-@app.route("/books/<int:id>", methods=["PUT"])
-def update_book(id: int):
-    updated_book = request.get_json()
+        return response_obj([p.serialize() for p in planets], None)
 
-    for i, book in enumerate(books):
-        if book.get("id") == id:
-            books[i].update(updated_book)
-            return jsonify(books[i])
+    @app.route("/planets/<int:id>", methods=["GET"])
+    def get_planet_by_id(id: int):
+        planet = session.get(Planet, id)
 
-    return jsonify(None)
+        return response_obj(planet.serialize(), None)
 
+    @app.route("/planets/<int:id>", methods=["DELETE"])
+    def remove_planet(id: int):
+        planet = session.get(Planet, id)
 
-@app.route("/books/<int:id>", methods=["DELETE"])
-def remove_book(id: int):
-    for i, book in enumerate(books):
-        if book.get("id") == id:
-            del books[i]
+        session.delete(planet)
+        session.commit()
 
-    return jsonify(books)
+        return response_obj(None, None)
 
+    @app.errorhandler(Exception)
+    def handle_sqlalchemy_assertion_error(err):
+        return response_obj(None, str(err))
 
-@app.route("/books", methods=["POST"])
-def insert_book():
-    new_book = request.get_json()
-    books.append(new_book)
-    return jsonify(new_book)
-
-
-app.run(port=5000, host="localhost", debug=True)
+    return app

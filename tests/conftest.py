@@ -1,5 +1,7 @@
 import pytest
 import sw_planets_api.models.db as db
+
+from sw_planets_api.app import create_app
 from sqlalchemy.orm import Session
 
 
@@ -19,3 +21,18 @@ def session(scope="function") -> Session:
     __session.commit()
 
     return __session
+
+
+@pytest.fixture()
+def app(session):
+    return create_app(session)
+
+
+@pytest.fixture()
+def client(app):
+    return app.test_client()
+
+
+@pytest.fixture()
+def runner(app):
+    return app.test_cli_runner()
