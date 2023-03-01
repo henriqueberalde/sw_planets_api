@@ -9,9 +9,13 @@ __session = Session(db.get_engine("mysql+pymysql://root:root@localhost:3309/db")
 @pytest.fixture()
 def session(scope="function") -> Session:
     __session.expunge_all()
+    __session.execute("DELETE FROM planets_films;")
     __session.execute("DELETE FROM planets;")
+    __session.execute("DELETE FROM films;")
 
+    __session.execute("ALTER TABLE planets_films AUTO_INCREMENT = 1;")
     __session.execute("ALTER TABLE planets AUTO_INCREMENT = 1;")
+    __session.execute("ALTER TABLE films AUTO_INCREMENT = 1;")
     __session.commit()
 
     return __session

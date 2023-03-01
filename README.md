@@ -81,8 +81,8 @@ Possible improvements:
 - [x] Setup Docker
 - [x] Setup DB
 - [x] Setup ORM
-- [ ] Setup DB and ORM for test
-- [ ] Create Entities Planet and Film
+- [x] Setup DB and ORM for test
+- [x] Create Entities Planet and Film
 - [ ] Setup api lib
 - [ ] Load planet from api by id
 - [ ] List all planets
