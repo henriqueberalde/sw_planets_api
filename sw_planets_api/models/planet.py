@@ -2,7 +2,6 @@ import sw_planets_api.models.db as db
 
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
-
 from datetime import datetime
 
 
@@ -36,6 +35,24 @@ class Planet(db.Base):
            "films": [f.serialize() for f in self.films]
         }
 
+    @staticmethod
+    def from_json(session, json, id) -> "Planet":
+        from_db: Planet = session.get(Planet, id)
+
+        if from_db is not None:
+            return from_db
+
+        name = json.get("name")
+        climate = json.get("climate")
+        terrain = json.get("terrain")
+
+        return Planet(
+            id=id,
+            name=name,
+            climate=climate,
+            terrain=terrain
+        )
+
 
 class Film(db.Base):
     __tablename__ = "films"
@@ -57,6 +74,23 @@ class Film(db.Base):
            "director": self.director,
            "release_date": dump_datetime(self.release_date)
         }
+
+    @staticmethod
+    def from_json(session, json, id) -> "Film":
+        from_db: Film = session.get(Film, id)
+        if from_db is not None:
+            return from_db
+
+        title = json.get("title")
+        director = json.get("director")
+        release_date = datetime.strptime(json.get("release_date"), '%Y-%m-%d')
+
+        return Film(
+            id=id,
+            title=title,
+            director=director,
+            release_date=release_date
+        )
 
 
 class PlanetsFilms(db.Base):

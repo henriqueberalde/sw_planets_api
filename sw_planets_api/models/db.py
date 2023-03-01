@@ -21,4 +21,4 @@ def get_session() -> Session:
     return Session(get_engine())
 
 
-Base = declarative_base(get_engine())
+Base = declarative_base(get_engine(None))

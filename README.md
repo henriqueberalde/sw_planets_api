@@ -52,6 +52,11 @@ docker run --env MYSQL_DATABASE=db --env MYSQL_ROOT_PASSWORD=root -p 3309:3306 -
 pytest -v
 ```
 
+Coverage
+```
+pytest --cov=sw_planets_api tests/
+```
+
 ## Logging
 
 Log information is written, by default, into the file '???.log'
@@ -84,33 +89,20 @@ Possible improvements:
 - [x] Setup DB and ORM for test
 - [x] Create Entities Planet and Film
 - [x] Setup api lib (Flask)
-- [ ] Load planet from api by id
-- [x] List all planets
-- [x] Search planet by name
-- [x] Search planet by id
-- [x] Remove Planet
+- [x] `Endpoint` Load planet from api by id
+- [x] `Endpoint` List all planets
+- [x] `Endpoint` Search planet by name
+- [x] `Endpoint` Search planet by id
+- [x] `Endpoint` Remove Planet
 - [x] Global response pattern for all requests
-- [ ] Test Coverage
+- [x] Test Coverage
 - [ ] Log
 - [ ] Api Documentation (with examples)
+
 - [ ] Check Content-Type on header
 - [ ] Remove all single braquets
 - [ ] Test conteinerized env
+- [ ] Try to put all type annotations
+- [ ] Remove print
 
-
-
-https://swapi.dev/about
-
-https://swapi.dev/documentation
-
-https://swapi.dev/
-
-Planets (https://swapi.dev/api/planets)
-    name
-    climate
-    terrain
-    films (https://swapi.dev/api/films/1/)
-        title
-        director
-        release_date
         

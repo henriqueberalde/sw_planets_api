@@ -1,7 +1,8 @@
 import sw_planets_api.models.db as db
 
 from flask import Flask, jsonify, request, make_response, Response
-from sw_planets_api.models.planet import Planet, PlanetsFilms
+from sw_planets_api.models.planet import Planet
+from sw_planets_api.services.star_wars_api_service import StarWarsApiService
 
 
 def response_obj(data, error):
@@ -26,8 +27,15 @@ def create_app(session=None):
     app = Flask(__name__)
 
     @app.route("/planets/load/<int:id>", methods=["POST"])
-    def insert_planet_from_api():
-        return response_obj(None, None)
+    def insert_planet_from_api(id):
+        planet = StarWarsApiService.load_planet(session, id)
+
+        if not planet.metadata.is_bound:
+            session.add(planet)
+
+        session.commit()
+
+        return response_obj(planet.serialize(), None)
 
     @app.route("/planets", methods=["GET"])
     def get_planets():
