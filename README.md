@@ -96,13 +96,8 @@ Possible improvements:
 - [x] `Endpoint` Remove Planet
 - [x] Global response pattern for all requests
 - [x] Test Coverage
-- [ ] Log
+- [x] Log
 - [ ] Api Documentation (with examples)
 
-- [ ] Check Content-Type on header
-- [ ] Remove all single braquets
 - [ ] Test conteinerized env
-- [ ] Try to put all type annotations
-- [ ] Remove print
-
-        
+- [x] Remove print

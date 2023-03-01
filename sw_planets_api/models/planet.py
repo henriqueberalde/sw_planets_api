@@ -21,9 +21,9 @@ class Planet(db.Base):
     climate = Column(String)
     terrain = Column(String)
     films = relationship(
-        'Film',
-        secondary='planets_films',
-        back_populates='planets'
+        "Film",
+        secondary="planets_films",
+        back_populates="planets"
     )
 
     def serialize(self):
@@ -62,9 +62,9 @@ class Film(db.Base):
     director = Column(String)
     release_date = Column(DateTime)
     planets = relationship(
-        'Planet',
-        secondary='planets_films',
-        back_populates='films'
+        "Planet",
+        secondary="planets_films",
+        back_populates="films"
     )
 
     def serialize(self):
@@ -83,7 +83,7 @@ class Film(db.Base):
 
         title = json.get("title")
         director = json.get("director")
-        release_date = datetime.strptime(json.get("release_date"), '%Y-%m-%d')
+        release_date = datetime.strptime(json.get("release_date"), "%Y-%m-%d")
 
         return Film(
             id=id,
@@ -97,8 +97,8 @@ class PlanetsFilms(db.Base):
     __tablename__ = "planets_films"
 
     id_planet = Column(Integer,
-                       ForeignKey('planets.id'),
+                       ForeignKey("planets.id"),
                        primary_key=True)
     id_film = Column(Integer,
-                     ForeignKey('films.id'),
+                     ForeignKey("films.id"),
                      primary_key=True)

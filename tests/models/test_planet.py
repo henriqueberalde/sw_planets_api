@@ -1,5 +1,3 @@
-import json
-
 from sw_planets_api.models.planet import Planet, Film
 from sqlalchemy.orm import Session
 from datetime import datetime

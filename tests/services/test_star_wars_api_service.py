@@ -5,7 +5,6 @@ from sqlalchemy.orm import Session
 from sw_planets_api.models.planet import Film
 from sw_planets_api.services.star_wars_api_service import StarWarsApiService
 from pytest_mock.plugin import MockerFixture
-from requests import Response
 from pytest_mock._util import _mock_module
 
 
@@ -45,7 +44,7 @@ def test_swapi_service_load_planet_not_found(session, mocker):
 
     with pytest.raises(
             Exception,
-            match="Planet 12345 not found on star wars api. Please check id number again on https://swapi.dev/"):
+            match="Planet 12345 not found on star wars api. Please check id number again on https://swapi.dev/"):  # nopep8
         StarWarsApiService.load_planet(session, 12345)
 
 

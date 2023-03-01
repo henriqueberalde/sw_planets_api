@@ -1,8 +1,6 @@
 import sys
 import logging
-import sw_planets_api.models.db as db
 
-from sw_planets_api.models.planet import Planet
 from app import create_app
 
 logging.basicConfig(

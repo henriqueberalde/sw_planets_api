@@ -22,8 +22,6 @@ def test_app_get_planets_id_query_string(session, client: FlaskClient):
 
     body_obj = json.loads(res.get_data(as_text=True))
 
-    print(body_obj)
-
     assert res.status_code == 200
     assert body_obj.get("data")[0].get("name") == "Planet_1"
     assert len(body_obj.get("data")) == 1
@@ -41,8 +39,6 @@ def test_app_get_planets_name_query_string(session, client: FlaskClient):
     res = client.get("/planets?name=Planet_2")
 
     body_obj = json.loads(res.get_data(as_text=True))
-
-    print(body_obj)
 
     assert res.status_code == 200
     assert body_obj.get("data")[0].get("name") == "Planet_2"
@@ -62,8 +58,6 @@ def test_app_get_planets_by_id(session, client: FlaskClient):
 
     body_obj = json.loads(res.get_data(as_text=True))
 
-    print(body_obj)
-
     assert res.status_code == 200
     assert body_obj.get("data").get("name") == "Planet_2"
     assert body_obj.get("error") is None
@@ -78,8 +72,6 @@ def test_app_remove_planet(session, client: FlaskClient):
     res = client.delete("/planets/1")
 
     body_obj = json.loads(res.get_data(as_text=True))
-
-    print(body_obj)
 
     assert res.status_code == 200
     assert body_obj.get("data") is None
@@ -98,8 +90,6 @@ def test_app_remove_planet_with_films(session, client: FlaskClient):
     res = client.delete("/planets/1")
 
     body_obj = json.loads(res.get_data(as_text=True))
-
-    print(body_obj)
 
     assert res.status_code == 200
     assert body_obj.get("data") is None

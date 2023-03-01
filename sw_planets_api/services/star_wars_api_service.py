@@ -1,6 +1,4 @@
 import requests
-
-
 from sw_planets_api.models.planet import Planet, Film
 
 
