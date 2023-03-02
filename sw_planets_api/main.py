@@ -15,7 +15,7 @@ def main() -> None:
     app = create_app()
 
     s = Swagger(app)
-    app.run(port=5000, host="localhost", debug=True)
+    app.run(port=5005, host="0.0.0.0", debug=True)
 
 
 if __name__ == "__main__":

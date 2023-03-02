@@ -1,14 +1,17 @@
 services:
   sw_planets_api:
+    hostname: sw_planets_api
     build: ./
-    command: sh -c "sleep 10s ; python3 ./sw_planets_api/main.py"
     ports:
-      - 5000:5000
+      - 5005:5005
     depends_on:
       - sw_planets_db
-    
+    environment:
+      WAIT_HOSTS: sw_planets_db:3306
+      SW_PLANET_API_ENV: container
 
   sw_planets_db:
+    hostname: sw_planets_db
     build: ./db/
     restart: always
     environment:

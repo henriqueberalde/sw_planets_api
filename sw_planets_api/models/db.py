@@ -12,7 +12,7 @@ def get_engine(conn_string=None) -> Engine:  # nopep8
         conn_string = "mysql+pymysql://root:root@localhost:3308/db"
 
     if env == "container":
-        conn_string = "mysql+pymysql://root:root@sw_planets_db/db"
+        conn_string = "mysql+pymysql://root:root@sw_planets_db:3306/db"
 
     return create_engine(conn_string)
 
